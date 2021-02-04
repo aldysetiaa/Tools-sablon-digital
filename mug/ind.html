@@ -1,0 +1,50 @@
+  <html>
+  <body>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css"> 
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://rawgit.com/kangax/fabric.js/master/dist/fabric.min.js"></script>
+
+
+<div class="container">
+<div class="row">
+<div class="col s12">
+
+<button class="btn" onclick="addText()">Add Custom Text</button>
+
+<select class="browser-default"  id="font">
+  <option>arial</option>
+  <option>tahoma</option>
+  <option>times new roman</option>
+</select>
+<br />
+<canvas id="canvas" width="750" height="550" style="border:1px solid #333"></canvas>
+
+</div>
+</div>
+</div>
+  </body>
+
+  <script type="text/javascript">
+var canvas = new fabric.Canvas('canvas');
+$('#font').change(function(){
+  var obj = canvas.getActiveObject();
+  if(obj){
+    obj.setFontFamily($(this).val());
+  }
+  canvas.renderAll();
+});
+
+function addText() {
+  var oText = new fabric.IText('Tap and Type', { 
+    left: 100, 
+    top: 100 ,
+  });
+
+  canvas.add(oText);
+  canvas.setActiveObject(oText);
+  $('#fill, #font').trigger('change');
+  oText.bringToFront();
+}
+
+</script>
